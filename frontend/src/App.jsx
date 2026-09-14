@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddApplication from "./pages/AddApplication";
 import Applications from "./pages/Applications";
+import DSA from "./pages/DSA";
 
 function App(){
   return (
@@ -15,6 +16,7 @@ function App(){
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add" element={<AddApplication />} />
         <Route path="/applications" element={<Applications />} />
+        <Route path="/dsa" element={<DSA />} />
       </Routes>
     </BrowserRouter>
   );

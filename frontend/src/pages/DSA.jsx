@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function DSA() {
     const [topic, setTopic] = useState("");
@@ -135,6 +136,8 @@ function DSA() {
 
     return (
         <div>
+            <Navbar />
+            
             <h1>DSA Tracker</h1>
 
             <p>Track your DSA preparation progress.</p>

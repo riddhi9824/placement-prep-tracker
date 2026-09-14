@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function AddApplication() {
     const navigate = useNavigate();
@@ -43,6 +44,8 @@ function AddApplication() {
 
     return (
         <div>
+            <Navbar />
+            
             <h1>Add Application</h1>
 
             <form onSubmit={handleSubmit}>

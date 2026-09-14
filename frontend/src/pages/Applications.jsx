@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function Applications() {
     const [applications, setApplications] = useState([]);
@@ -101,6 +102,8 @@ function Applications() {
 
     return (
         <div>
+            <Navbar />
+            
             <h1>My Applications</h1>
 
             {applications.length === 0 ? (

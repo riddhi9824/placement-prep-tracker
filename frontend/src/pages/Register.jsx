@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
+import "../styles/Auth.css";
 
 function Register() {
     const navigate = useNavigate();
@@ -28,10 +29,10 @@ function Register() {
     };
 
     return (
-        <div>
+        <div className="auth-page">
             <h1>Register</h1>
 
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleRegister} className="auth-form">
 
                 <input
                     type="text"
@@ -60,11 +61,15 @@ function Register() {
 
                 <br /><br />
 
-                <button type="submit">
+                <button type="submit" className="auth-button">
                     Register
                 </button>
 
             </form>
+
+            <p className="auth-link">
+                Already have an account? <a href="/">Login</a>
+            </p>
         </div>
     );
 }

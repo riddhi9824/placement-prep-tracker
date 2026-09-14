@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import StatCard from "../components/StatCard";
+import "../styles/Dashboard.css";
 
 function Dashboard() {
     const [stats, setStats] = useState({
@@ -61,52 +63,56 @@ function Dashboard() {
     return (
         <div>
             <Navbar />
+
+            <div className="dashboard-container">
             
-            <h1>Placement Preparation Dashboard</h1>
+                <h1>Placement Preparation Dashboard</h1>
 
-            <div>
-                <h3>Total Applications</h3>
-                <p>{stats.total}</p>
-            </div>
+                <div className="stats-grid">
+            
+                    <StatCard
+                        title="Total Applications"
+                        value={stats.total}
+                    />
 
-            <div>
-                <h3>Applied</h3>
-                <p>{stats.applied}</p>
-            </div>
+                    <StatCard
+                        title="Applied"
+                        value={stats.applied}
+                    />
 
-            <div>
-                <h3>Online Assessment</h3>
-                <p>{stats.oa}</p>
-            </div>
+                    <StatCard
+                        title="Online Assessment"
+                        value={stats.oa}
+                    />
 
-            <div>
-                <h3>Interview</h3>
-                <p>{stats.interview}</p>
-            </div>
+                    <StatCard
+                        title="Interview"
+                        value={stats.interview}
+                    />
 
-            <div>
-                <h3>Selected</h3>
-                <p>{stats.selected}</p>
-            </div>
+                    <StatCard
+                        title="Selected"
+                        value={stats.selected}
+                    />
 
-            <div>
-                <h3>Rejected</h3>
-                <p>{stats.rejected}</p>
-            </div>
+                    <StatCard
+                        title="Rejected"
+                        value={stats.rejected}
+                    />
 
-            <div>
-                <h3>DSA Topics</h3>
-                <p>{dsaTopics.length}</p>
-            </div>
+                    <StatCard
+                        title="DSA Topics"
+                        value={dsaTopics.length}
+                    />
 
-            <div>
-                <h3>Problems Solved</h3>
-                <p>
-                    {dsaTopics.reduce(
-                        (total, item) => total + item.solved,
-                        0
-                    )}
-                </p>
+                    <StatCard
+                        title="Problems Solved"
+                        value={dsaTopics.reduce(
+                            (total, item) => total + item.solved,
+                            0
+                        )}
+                    />
+                </div>
             </div>
         </div>
     );

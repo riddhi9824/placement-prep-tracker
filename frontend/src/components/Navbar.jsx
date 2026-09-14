@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import "../styles/Navbar.css";
 
 function Navbar() {
     return (
-        <nav>
-            <h2>Placement Preparation Tracker</h2>
+        <nav className="navbar">
+            <h2 className="navbar-title">Placement Preparation Tracker</h2>
 
-            <div>
+            <div className="navbar-links">
                 <Link to="/dashboard">Dashboard</Link>
 
                 {" | "}

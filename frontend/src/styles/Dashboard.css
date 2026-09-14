@@ -1,0 +1,16 @@
+.dashboard-container {
+    padding: 30px;
+}
+
+.dashboard-container h1 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}

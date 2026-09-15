@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import StatCard from "../components/StatCard";
 import "../styles/Dashboard.css";
@@ -112,6 +113,37 @@ function Dashboard() {
                             0
                         )}
                     />
+                </div>
+
+                <div className="quick-actions">
+
+                    <h2>Quick Actions</h2>
+
+                    <div className="quick-action-buttons">
+
+                        <Link 
+                            to="/add" 
+                            className="quick-action-button"
+                        >
+                            Add Application
+                        </Link>
+
+                        <Link 
+                            to="/applications" 
+                            className="quick-action-button"
+                        >
+                            View Applications
+                        </Link>
+
+                        <Link 
+                            to="/dsa" 
+                            className="quick-action-button"
+                        >
+                            DSA Tracker
+                        </Link>
+
+                    </div>
+
                 </div>
             </div>
         </div>

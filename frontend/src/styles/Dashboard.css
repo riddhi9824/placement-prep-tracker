@@ -14,3 +14,31 @@
     margin-top: 25px;
     margin-bottom: 30px;
 }
+
+.quick-actions {
+    margin-top: 20px;
+}
+
+.quick-actions h2 {
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.quick-action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.quick-action-button {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.quick-action-button:hover {
+    background-color: #1d4ed8;
+}

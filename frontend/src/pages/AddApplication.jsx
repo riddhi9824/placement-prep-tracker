@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "../styles/AddApplication.css";
 
 function AddApplication() {
     const navigate = useNavigate();
@@ -43,12 +44,12 @@ function AddApplication() {
     };
 
     return (
-        <div>
+        <div className="add-application-container">
             <Navbar />
             
             <h1>Add Application</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="application-form">
 
                 <input
                     type="text"
@@ -81,7 +82,10 @@ function AddApplication() {
 
                 <br /><br />
 
-                <button type="submit">
+                <button 
+                    type="submit"
+                    className="application-submit-button"
+                >
                     Add Application
                 </button>
 

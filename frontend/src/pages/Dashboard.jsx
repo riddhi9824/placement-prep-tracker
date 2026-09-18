@@ -115,6 +115,25 @@ function Dashboard() {
                     />
                 </div>
 
+                <div className="recent-activity">
+                    <h2>Recent Activity</h2>
+
+                    <div className="activity-item">
+                        <span>📋</span>
+                        <p>Track your latest placement applications</p>
+                    </div>
+
+                    <div className="activity-item">
+                        <span>🧠</span>
+                        <p>Keep updating your DSA preparation progress.</p>
+                    </div>
+
+                    <div className="activity-item">
+                        <span>🎯</span>
+                        <p>Stay consistent with your placement preparation</p>
+                    </div>
+                </div>
+
                 <div className="quick-actions">
 
                     <h2>Quick Actions</h2>

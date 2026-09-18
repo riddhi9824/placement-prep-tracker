@@ -88,3 +88,18 @@
     background-color: #fee2e2;
     color: #991b1b;
 }
+
+@media (max-width: 900px) {
+    .application-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .applications-container {
+        padding: 20px;
+    }
+    .application-list {
+        grid-template-columns: 1fr;
+    }
+}

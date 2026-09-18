@@ -1,0 +1,122 @@
+.dsa-container {
+    padding: 30px;
+}
+
+.dsa-container h1 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.dsa-description {
+    margin-bottom: 25px;
+    color: #64748b;
+}
+
+.dsa-form {
+    max-width: 500px;
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dsa-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #475569;
+    font-weight: 600;
+}
+
+.dsa-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px;
+    margin-bottom: 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.dsa-form input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.dsa-submit-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dsa-submit-button:hover {
+    background-color: #1d4ed8;
+}
+
+.dsa-topics-section {
+    margin-top: 35px;
+}
+
+.dsa-topics-section h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.dsa-topic-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dsa-topic-card {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dsa-topic-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.dsa-topic-card p {
+    color: #475569;
+}
+
+.dsa-update-button {
+    padding: 9px 14px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dsa-update-button:hover {
+    background-color: #1d4ed8;
+}
+
+.dsa-delete-button {
+    padding: 9px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ef4444;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dsa-delete-button:hover {
+    background-color: #dc2626;
+}

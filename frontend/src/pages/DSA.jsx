@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "../styles/DSA.css";
 
 function DSA() {
     const [topic, setTopic] = useState("");
@@ -135,14 +136,16 @@ function DSA() {
     };
 
     return (
-        <div>
+        <div className="dsa-container">
             <Navbar />
             
             <h1>DSA Tracker</h1>
 
-            <p>Track your DSA preparation progress.</p>
+            <p className="dsa-description">
+                Track your DSA preparation progress.
+            </p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="dsa-form">
 
                 <input
                     type="text"
@@ -165,45 +168,49 @@ function DSA() {
                 <br />
                 <br />
 
-                <button type="submit">
+                <button 
+                    type="submit"
+                    className="dsa-submit-button"
+                >
                     Add Topic
                 </button>
 
             </form>
 
-            <hr />
+            <div className="dsa-topics-section">
+                <h2>My DSA Topics</h2>
 
-            <h2>My DSA Topics</h2>
+                {topics.length === 0 ? (
+                    <p>No DSA topics found.</p>
+                ) :(
+                    <div className="dsa-topic-list">
+                        {topics.map((item) => (
+                            <div key={item._id} className="dsa-topic-card">
+                                <h3>{item.topic}</h3>
 
-            {topics.length === 0 ? (
-                <p>No DSA topics found.</p>
-            ) :(
-                <div>
-                    {topics.map((item) => (
-                        <div key={item._id}>
-                            <h3>{item.topic}</h3>
+                                <p>
+                                    Problems Solved: {item.solved}
+                                </p>
 
-                            <p>
-                                Problems Solved: {item.solved}
-                            </p>
+                                <button 
+                                    className="dsa-update-button"
+                                    onClick={() => updateSolved(item._id, item.solved)}
+                                >
+                                    Update
+                                </button>
 
-                            <button 
-                                onClick={() => updateSolved(item._id, item.solved)}
-                            >
-                                Update
-                            </button>
+                                <button 
+                                    className="dsa-delete-button"
+                                    onClick={() => deleteTopic(item._id)}
+                                >
+                                    Delete
+                                </button>
 
-                            <button 
-                                onClick={() => deleteTopic(item._id)}
-                            >
-                                Delete
-                            </button>
-
-                            <hr />
-                        </div>
-                    ))}
-                </div>
-            )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

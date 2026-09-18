@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import "../styles/Applications.css";
+import StatusBadge from "../components/StatusBadge";
 
 function Applications() {
     const [applications, setApplications] = useState([]);
@@ -101,24 +103,24 @@ function Applications() {
     };
 
     return (
-        <div>
+        <div  className="applications-container">
             <Navbar />
-            
+
             <h1>My Applications</h1>
 
             {applications.length === 0 ? (
                 <p>No applications found.</p>
             ) : (
-                <div>
+                <div className="application-list">
                     {applications.map((application) => (
-                        <div key={application._id}>
+                        <div key={application._id} className="application-card">
 
                             <h3>{application.company}</h3>
 
                             <p>Role: {application.role}</p>
 
                             <p>
-                                Current Status: {application.status}
+                                Current Status: <StatusBadge status={application.status} />
                             </p>
 
                             <select
@@ -155,6 +157,7 @@ function Applications() {
                             <br />
 
                             <button 
+                                className="delete-button"
                                 onClick={() =>
                                     deleteApplication(application._id)
                                 }

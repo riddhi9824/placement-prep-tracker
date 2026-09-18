@@ -1,0 +1,90 @@
+.applications-container {
+    padding: 30px;
+}
+
+.applications-container h1 {
+    margin-bottom: 25px;
+    color: #1e293b;
+}
+
+.application-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.application-card {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.application-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.application-card p {
+    margin: 8px 0;
+    color: #475569;
+}
+
+.application-card select {
+    width: 100%;
+    padding: 9px;
+    margin-top: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.delete-button {
+    margin-top: 15px;
+    padding: 9px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ef4444;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.delete-button:hover {
+    background-color: #dc2626;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.status-badge.applied {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.oa {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.status-badge.interview {
+    background-color: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-badge.selected {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}

@@ -105,6 +105,18 @@ function DSA() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(!topic.trim()) {
+            alert("Please enter a DSA topic name.");
+            return;
+        }
+
+        const solvedCount = Number(solved);
+
+        if(!Number.isInteger(solvedCount) || solvedCount < 0) {
+            alert("Problems solved must be a non-negative whole number.");
+            return;
+        }
+
         try {
             const token = localStorage.getItem("token");
 
@@ -112,7 +124,7 @@ function DSA() {
                 "http://localhost:5000/api/dsa/add",
                 {
                     topic,
-                    solved: Number(solved)
+                    solved: solvedCount
                 },
                 {
                     headers: {

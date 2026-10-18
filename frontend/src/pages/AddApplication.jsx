@@ -14,6 +14,11 @@ function AddApplication() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!company.trim() || !role.trim()){
+            alert("Please enter both company name and role.");
+            return;
+        }
+
         try {
             const token = localStorage.getItem("token");
 

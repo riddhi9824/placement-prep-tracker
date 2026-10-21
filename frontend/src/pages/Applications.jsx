@@ -65,6 +65,59 @@ function Applications() {
         }
     };
 
+    const editApplication = async (application) => {
+        const company = prompt(
+            "Enter company name:",
+            application.company
+        );
+
+        if (company === null) return;
+
+        const role = prompt(
+            "Enter job role:",
+            application.role
+        );
+
+        if(role === null) return;
+
+        if(!company.trim() || !role.trim()) {
+            alert("Company name and job role cannot be empty.");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await axios.put(
+                `http://localhost:5000/api/applications/${application._id}`,
+                {
+                    company: company.trim(),
+                    role: role.trim()
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setApplications((previousApplications) => 
+                previousApplications.map((item) =>
+                    item._id === application._id
+                        ? response.data
+                        : item
+                )
+            );
+
+            alert("Application updated successfully!");
+        } catch (error) {
+            alert (
+                error.response?.data?.message ||
+                "Failed to edit application"
+            );
+        }
+    };
+
     const deleteApplication = async (id) => {
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this application?"
@@ -155,6 +208,13 @@ function Applications() {
 
                             <br />
                             <br />
+
+                            <button 
+                                className="edit-button"
+                                onClick={() => editApplication(application)}
+                            >
+                                Edit
+                            </button>
 
                             <button 
                                 className="delete-button"

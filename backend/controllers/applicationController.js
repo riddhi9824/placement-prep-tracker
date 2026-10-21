@@ -51,7 +51,29 @@ const updateApplication = async(req, res) => {
             });
         }
 
-        application.status = req.body.status;
+        if (req.body.status !== undefined) {
+            application.status = req.body.status;
+        }
+
+        if (req.body.company !== undefined) {
+            if (!req.body.company.trim()) {
+                return res.status(400).json({
+                    message: "Company name cannot be empty"
+                });
+            }
+
+            application.company = req.body.company.trim();
+        }
+
+        if (req.body.role !== undefined) {
+            if (!req.body.role.trim()) {
+                return res.status(400).json({
+                    message: "Job role cannot be empty"
+                });
+            }
+
+            application.role = req.body.role.trim();
+        }
 
         await application.save();
 

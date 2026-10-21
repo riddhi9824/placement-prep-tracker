@@ -7,6 +7,9 @@ import StatusBadge from "../components/StatusBadge";
 function Applications() {
     const [applications, setApplications] = useState([]);
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [statusFilter, setStatusFilter] = useState("All");    
+
     useEffect(() => {
         const fetchApplications = async () => {
             try {
@@ -155,82 +158,91 @@ function Applications() {
         }
     };
 
+    const filteredApplications = applications.filter((application) => {
+        const matchesSearch = 
+            application.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            application.role.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const matchesStatus = 
+            statusFilter === "All" || application.status === statusFilter;
+
+        return matchesSearch && matchesStatus;
+    });
+
     return (
         <div  className="applications-container">
             <Navbar />
 
             <h1>My Applications</h1>
 
-            {applications.length === 0 ? (
-                <p>No applications found.</p>
-            ) : (
-                <div className="application-list">
-                    {applications.map((application) => (
-                        <div key={application._id} className="application-card">
+            <div className="application-filters">
+                <input
+                    type="text"
+                    placeholder="Search by company or job role..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
 
-                            <h3>{application.company}</h3>
+                <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                >
+                    <option value="All">All Statuses</option>
+                    <option value="Applied">Applied</option>
+                    <option value="OA">Online Assessment</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Selected">Selected</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
 
-                            <p>Role: {application.role}</p>
+            {filteredApplications.length === 0 ? (
+    <p>No matching applications found.</p>
+) : (
+    <div className="application-list">
+        {filteredApplications.map((application) => (
+            <div key={application._id} className="application-card">
+                <h3>{application.company}</h3>
+                <p>Role: {application.role}</p>
+                <p>
+                    Current Status: <StatusBadge status={application.status} />
+                </p>
 
-                            <p>
-                                Current Status: <StatusBadge status={application.status} />
-                            </p>
+                <select
+                    defaultValue={application.status}
+                    onChange={(e) =>
+                        updateStatus(application._id, e.target.value)
+                    }
+                >
+                    <option value="Applied">Applied</option>
+                    <option value="OA">Online Assessment</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Selected">Selected</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
 
-                            <select
-                                defaultValue={application.status}
-                                onChange={(e) =>
-                                    updateStatus(
-                                        application._id,
-                                        e.target.value
-                                    )
-                                }
-                            >
-                                <option value="Applied">
-                                    Applied
-                                </option>
+                <br />
+                <br />
 
-                                <option value="OA">
-                                    Online Assessment
-                                </option>
+                <button
+                    className="edit-button"
+                    onClick={() => editApplication(application)}
+                >
+                    Edit
+                </button>
 
-                                <option value="Interview">
-                                    Interview
-                                </option>
+                <button
+                    className="delete-button"
+                    onClick={() => deleteApplication(application._id)}
+                >
+                    Delete
+                </button>
 
-                                <option value="Selected">
-                                    Selected
-                                </option>
-
-                                <option value="Rejected">
-                                    Rejected
-                                </option>
-                            </select>
-
-                            <br />
-                            <br />
-
-                            <button 
-                                className="edit-button"
-                                onClick={() => editApplication(application)}
-                            >
-                                Edit
-                            </button>
-
-                            <button 
-                                className="delete-button"
-                                onClick={() =>
-                                    deleteApplication(application._id)
-                                }
-                            >
-                                Delete
-                            </button>
-
-                            <hr />
-
-                        </div>
-                    ))}
-                </div>
-            )}
+                <hr />
+            </div>
+        ))}
+    </div>
+)}
         </div>
     );
 }

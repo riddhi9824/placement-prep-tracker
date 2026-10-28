@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {
+    PieChart,
+    Pie,
+    Cell,
+    Tooltip,
+    Legend,
+    ResponsiveContainer
+} from "recharts";
 import Navbar from "../components/Navbar";
 import StatCard from "../components/StatCard";
 import "../styles/Dashboard.css";
@@ -77,6 +85,15 @@ function Dashboard() {
             Math.round((totalProblemsSolved / totalProblemTarget) * 100)
         )
         : 0;
+
+
+    const applicationChartData = [
+        { name: "Applied", value: stats.applied },
+        { name: "Online Assessment", value: stats.oa },
+        { name: "Interview", value: stats.interview },
+        { name: "Selected", value: stats.selected },
+        { name: "Rejected", value: stats.rejected }
+    ].filter((item) => item.value > 0);
 
     return (
         <div>
@@ -155,6 +172,50 @@ function Dashboard() {
                             style={{ width: `${overallDsaProgress}%` }}
                         />
                     </div>
+                </div>
+
+                <div className="application-chart-section">
+                    <h2>Placement Application Status</h2>
+
+                    {applicationChartData.length === 0 ? (
+                        <p  className="chart-empty-message">
+                            No application data available yet. Add a placement application to see your chart.
+                        </p>
+                    ) : (
+                        <div className="application-chart">
+                            <ResponsiveContainer width="100%" height={320}>
+                                <PieChart>
+                                    <Pie
+                                        data={applicationChartData}
+                                        dataKey="value"
+                                        nameKey="name"
+                                        cx="50%"
+                                        cy="50%"
+                                        outerRadius={100}
+                                        label={({ name, percent }) => 
+                                            `${name} ${(percent * 100).toFixed(0)}%`    
+                                        }
+                                    >
+                                        {applicationChartData.map((entry, index) => (
+                                            <Cell
+                                                key={entry.name}
+                                                fill={[
+                                                    "#2563eb",
+                                                    "#0d9488",
+                                                    "#f59e0b",
+                                                    "#16a34a",
+                                                    "#ef4444"
+                                                ][index % 5]}
+                                            />
+                                        ))}
+                                    </Pie>
+
+                                    <Tooltip/>
+                                    <Legend/>
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                    )}
                 </div>
 
                 <div className="recent-activity">

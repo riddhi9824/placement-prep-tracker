@@ -127,3 +127,41 @@
         gap: 10px;
     }
 }
+
+.application-chart-section {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.application-chart-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.application-chart {
+    width: 100%;
+    min-width: 0;
+    height: 320px;
+}
+
+.chart-empty-message {
+    padding: 30px 15px;
+    text-align: center;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .application-chart-section {
+        padding: 18px;
+    }
+    .application-chart {
+        height: 300px;
+    }
+}

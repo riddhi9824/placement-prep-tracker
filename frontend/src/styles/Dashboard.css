@@ -165,3 +165,39 @@
         height: 300px;
     }
 }
+
+.application-funnel-section {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.application-funnel-section h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.funnel-description {
+    margin-bottom: 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.application-funnel-chart {
+    width: 100%;
+    min-width: 0;
+    height: 320px;
+}
+
+@media (max-width: 600px) {
+    .application-funnel-section {
+        padding: 18px;
+    }
+    .application-funnel-chart {
+        height: 300px;
+    }
+}

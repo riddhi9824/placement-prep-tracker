@@ -7,7 +7,12 @@ import {
     Cell,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid
 } from "recharts";
 import Navbar from "../components/Navbar";
 import StatCard from "../components/StatCard";
@@ -94,6 +99,14 @@ function Dashboard() {
         { name: "Selected", value: stats.selected },
         { name: "Rejected", value: stats.rejected }
     ].filter((item) => item.value > 0);
+
+    const applicationFunnelData = [
+        { stage: "Applied", count: stats.applied },
+        { stage: "Online Assessment", count: stats.oa },
+        { stage: "Interview", count: stats.interview },
+        { stage: "Selected", count: stats.selected },
+        { stage: "Rejected", count: stats.rejected }
+    ];
 
     return (
         <div>
@@ -216,6 +229,40 @@ function Dashboard() {
                             </ResponsiveContainer>
                         </div>
                     )}
+                </div>
+
+                <div className="application-funnel-section">
+                    <h2>Application Funnel</h2>
+                    <p className="funnel-description">
+                        Track your applications across different placement stages.
+                    </p>
+
+                    <div className="application-funnel-chart">
+                        <ResponsiveContainer width="100%" height={320}>
+                            <BarChart
+                                data={applicationFunnelData}
+                                margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis
+                                    dataKey="stage"
+                                    angle={-15}
+                                    textAnchor="end"
+                                    interval={0}
+                                    height={70}
+                                    tick={{ fontSize: 12 }}
+                                />
+                                <YAxis allowDecimals={false} />
+                                <Tooltip />
+                                <Bar
+                                    dataKey="count"
+                                    name="Applications"
+                                    fill="#2563eb"
+                                    radius={[6, 6, 0, 0]}
+                                />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
                 </div>
 
                 <div className="recent-activity">

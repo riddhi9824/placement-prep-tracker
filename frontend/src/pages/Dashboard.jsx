@@ -61,6 +61,23 @@ function Dashboard() {
         }
     };
 
+    const totalProblemsSolved = dsaTopics.reduce(
+        (total, item) => total + (Number(item.solved) || 0),
+        0
+    );
+
+    const totalProblemTarget = dsaTopics.reduce(
+        (total, item) => total + (Number(item.target) || 50),
+        0
+    );
+
+    const overallDsaProgress = totalProblemTarget > 0
+        ? Math.min(
+            100,
+            Math.round((totalProblemsSolved / totalProblemTarget) * 100)
+        )
+        : 0;
+
     return (
         <div>
             <Navbar />
@@ -113,6 +130,31 @@ function Dashboard() {
                             0
                         )}
                     />
+                </div>
+
+                <div className="overall-dsa-progress">
+                    <h2>Overall DSA Preparation Progress</h2>
+
+                    <div className="overall-dsa-summary">
+                        <span>
+                            Problems Solved: <strong>{totalProblemsSolved}</strong>
+                        </span>
+
+                        <span>
+                            Total Target: <strong>{totalProblemTarget}</strong>
+                        </span>
+
+                        <span>
+                            <strong>{overallDsaProgress}%</strong> Completed
+                        </span>
+                    </div>
+
+                    <div className="overall-dsa-track">
+                        <div
+                            className="overall-dsa-fill"
+                            style={{ width: `${overallDsaProgress}%` }}
+                        />
+                    </div>
                 </div>
 
                 <div className="recent-activity">

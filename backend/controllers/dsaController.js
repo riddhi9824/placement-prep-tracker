@@ -3,12 +3,13 @@ const DSA = require("../models/DSA");
 const addTopic = async(req, res) => {
     try {
 
-        const { topic, solved } = req.body;
+        const { topic, solved, target } = req.body;
 
         const data = await DSA.create({
             userId: req.user.id,
             topic,
-            solved
+            solved,
+            target: target === undefined ? 50 : Number(target)
         });
 
         res.status(201).json(data);
@@ -51,7 +52,29 @@ const updateTopic = async(req, res) => {
             });
         }
 
-        topic.solved = req.body.solved;
+        if (req.body.solved !== undefined) {
+            const solved = Number(req.body.solved);
+
+            if (!Number.isInteger(solved) || solved < 0) {
+                return res.status(400).json({
+                    message: "Problems solved must be a non-negative whole number."
+                });
+            }
+
+            topic.solved = solved;
+        }
+
+        if (req.body.target !== undefined) {
+            const target = Number(req.body.target);
+
+            if (!Number.isInteger(target) || target < 1) {
+                return res.status(400).json({
+                    message: "Target must be a positive whole number."
+                });
+            }
+
+            topic.target = target;
+        }
 
         await topic.save();
 

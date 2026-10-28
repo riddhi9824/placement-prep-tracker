@@ -6,6 +6,7 @@ import "../styles/DSA.css";
 function DSA() {
     const [topic, setTopic] = useState("");
     const [solved, setSolved] = useState(0);
+    const [target, setTarget] = useState(50);
     const [topics, setTopics] = useState([]);
 
     const fetchTopics = async () => {
@@ -65,6 +66,56 @@ function DSA() {
         }
     };
 
+    const updateTarget = async (id, currentTarget) => {
+        const newTarget = prompt(
+            "Enter the new target:",
+            currentTarget ?? 50
+        );
+
+        if (newTarget === null) {
+            return;
+        }
+
+        const targetCount = Number(newTarget);
+
+        if (!Number.isInteger(targetCount) || targetCount < 1) {
+            alert("Target must be a positive whole number.");
+            return;
+        }
+
+        const selectedTopic = topics.find((item) => item._id === id);
+
+        if (selectedTopic && targetCount < selectedTopic.solved) {
+            alert("Target cannot be less than problems already solved.");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            await axios.put(
+                `http://localhost:5000/api/dsa/${id}`,
+                {
+                    target: targetCount
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            alert("Target updated successfully!");
+            fetchTopics();
+
+        } catch (error) {
+            alert(
+                error.response?.data?.message ||
+                "Failed to update target"
+            );
+        }
+    };
+
     const deleteTopic = async (id) => {
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this DSA topic?"
@@ -117,6 +168,18 @@ function DSA() {
             return;
         }
 
+        const targetCount = Number(target);
+
+        if (!Number.isInteger(targetCount) || targetCount < 1) {
+            alert("Target must be a positive whole number.");
+            return;
+        }
+
+        if (solvedCount > targetCount) {
+            alert("Problems solved cannot exceed the target.");
+            return;
+        }
+
         try {
             const token = localStorage.getItem("token");
 
@@ -124,7 +187,8 @@ function DSA() {
                 "http://localhost:5000/api/dsa/add",
                 {
                     topic,
-                    solved: solvedCount
+                    solved: solvedCount,
+                    target: targetCount
                 },
                 {
                     headers: {
@@ -137,7 +201,9 @@ function DSA() {
 
             setTopic("");
             setSolved(0);
+            setTarget(50);
             fetchTopics();
+            
 
         } catch (error) {
             alert(
@@ -180,6 +246,15 @@ function DSA() {
                 <br />
                 <br />
 
+                <label>Target Problems</label>
+                <input 
+                    type="number"
+                    min="1"
+                    step="1"
+                    value={target}
+                    onChange={(e) => setTarget(e.target.value)}
+                    required
+                />
                 <button 
                     type="submit"
                     className="dsa-submit-button"
@@ -201,14 +276,46 @@ function DSA() {
                                 <h3>{item.topic}</h3>
 
                                 <p>
-                                    Problems Solved: {item.solved}
+                                    Problems Solved: {item.solved} / {item.target ?? 50}
                                 </p>
+
+                                <div className="dsa-progress-container">
+                                    <div className="dsa-progress-track">
+                                        <div
+                                            className="dsa-progress-fill"
+                                            style={{
+                                                width: `${Math.min(
+                                                    100,
+                                                    Math.round(
+                                                        (item.solved / (item.target ?? 50)) * 100
+                                                    )
+                                                )}%`
+                                            }}
+                                        />
+                                    </div>
+
+                                    <p className="dsa-progress-text">
+                                        {Math.min(
+                                            100,
+                                            Math.round(
+                                                (item.solved / (item.target ?? 50)) * 100
+                                            )
+                                        )}% completed
+                                    </p>
+                                </div>
 
                                 <button 
                                     className="dsa-update-button"
                                     onClick={() => updateSolved(item._id, item.solved)}
                                 >
                                     Update
+                                </button>
+
+                                <button
+                                    className="dsa-target-button"
+                                    onClick={() => updateTarget(item._id, item.target ?? 50)}
+                                >
+                                    Update Target
                                 </button>
 
                                 <button 

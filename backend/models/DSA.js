@@ -13,7 +13,15 @@ const dsaSchema = new mongoose.Schema({
 
     solved: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
+    },
+
+    target: {
+        type: Number,
+        required: true,
+        default: 50,
+        min: 1
     }
 }, {
     timestamps: true
